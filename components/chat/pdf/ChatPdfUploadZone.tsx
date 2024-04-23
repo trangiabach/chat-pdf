@@ -6,9 +6,9 @@ import { colors } from "@/lib/consts";
 import { usePdfs } from "@/providers/PdfsProvider";
 import { Pdf } from "@/types";
 import { FC, useCallback, useEffect, useState } from "react";
-import { FileRejection, useDropzone } from "react-dropzone";
+import { useDropzone } from "react-dropzone";
 import { MdOutlineDownloading } from "react-icons/md";
-import { useToast } from "@/components/ui/use-toast";
+import { toast } from "@/components/ui/sonner";
 
 export interface ChatPdfUploadZoneProps {
   setDialogOpen?: (open: boolean) => void;
@@ -23,8 +23,6 @@ export const ChatPdfUploadZone: FC<ChatPdfUploadZoneProps> = ({
 
   const { refreshPdfs, setSelectedPdf, pdfs } = usePdfs();
 
-  const { toast } = useToast();
-
   const onDrop = useCallback(async (acceptedFiles: File[]) => {
     try {
       const fileUploads = acceptedFiles.map((file) => uploadFileToBucket(file));
@@ -34,8 +32,7 @@ export const ChatPdfUploadZone: FC<ChatPdfUploadZoneProps> = ({
 
       const fileNamesString = acceptedFiles.map((file) => file.name).join(", ");
 
-      toast({
-        title: "Uploading files...",
+      toast(`Uploading files...`, {
         description: `Files ${fileNamesString}`,
       });
 
@@ -45,11 +42,12 @@ export const ChatPdfUploadZone: FC<ChatPdfUploadZoneProps> = ({
         .map((file) => file.name)
         .join(", ");
 
-      toast({
-        title:
-          "Sucessfully uploaded files. Beginning final step to embed files...",
-        description: `Files ${uploadedFilesString}`,
-      });
+      toast(
+        "Sucessfully uploaded files. Beginning final step to embed files...",
+        {
+          description: `Files ${uploadedFilesString}`,
+        }
+      );
 
       const sucessfullyUploadedFiles = uploadedFiles.filter(
         (file) => file.error === undefined
@@ -69,11 +67,9 @@ export const ChatPdfUploadZone: FC<ChatPdfUploadZoneProps> = ({
         setIsUploading(false);
       }
 
-      toast({
-        title:
-          "Embedding files... After this, the file will be ready for chatting.",
-        description: `Files ${uploadedFilesString}`,
-      });
+      toast(
+        "Embedding files... After this, the file will be ready for chatting."
+      );
 
       await embedPdfs(sucessfullyUploadedFiles);
 
@@ -83,8 +79,7 @@ export const ChatPdfUploadZone: FC<ChatPdfUploadZoneProps> = ({
 
       setIsUploading(false);
 
-      toast({
-        title: "Sucessfully embedded files. It is ready for chatting!",
+      toast(`Sucessfully embedded files. It is ready for chatting!`, {
         description: `Files ${uploadedFilesString}`,
       });
 
@@ -96,8 +91,7 @@ export const ChatPdfUploadZone: FC<ChatPdfUploadZoneProps> = ({
 
       const reportedError = error.message || JSON.stringify(error);
 
-      toast({
-        title: "Error encountered",
+      toast(`Error encountered`, {
         description: reportedError,
       });
 

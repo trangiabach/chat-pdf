@@ -6,7 +6,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Navbar } from "../components/common/navbar";
 import "./globals.css";
-import { Toaster } from "@/components/ui/toaster";
+import { Toaster } from "@/components/ui/sonner";
 import { ChatProvider } from "@/providers/ChatProvider";
 import { Analytics } from "@vercel/analytics/react";
 
@@ -42,7 +42,7 @@ export default function RootLayout({
             </PdfsProvider>
           </SettingsProvider>
         </ThemeProvider>
-        <Toaster />
+        <Toaster position="bottom-left" />
         <Analytics />
       </body>
     </html>

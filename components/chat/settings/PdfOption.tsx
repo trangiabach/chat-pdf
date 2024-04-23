@@ -9,6 +9,7 @@ import { useSettings } from "@/providers/SettingsProvider";
 import { Pdf } from "@/types";
 import React, { FC, useState } from "react";
 import { MdDownloading, MdOutlineDelete } from "react-icons/md";
+import { toast } from "@/components/ui/sonner";
 
 export interface PdfOptionInterface {
   pdf: Pdf;
@@ -34,6 +35,9 @@ export const PdfOption: FC<PdfOptionInterface> = ({ pdf }) => {
     await deleteFileFromBucket([pdf.name]);
     await refreshPdfs();
     setIsDeleting(false);
+    toast(`Deleted file`, {
+      description: `Deleted ${pdf.name}`,
+    });
   };
 
   const onClickOption = (event: React.MouseEvent<HTMLDivElement>) => {

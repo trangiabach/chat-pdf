@@ -44,6 +44,7 @@
     "remark-gfm": "^4.0.0",
     "remark-math": "^6.0.0",
     "scriptjs": "^2.5.9",
+    "sonner": "^1.4.41",
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7"
   },
