@@ -30,7 +30,10 @@ export const ChatPanel = () => {
         <ResizablePanel minSize={isMobile ? panelMinSize / 5 : panelMinSize}>
           <ChatPdfPanel />
         </ResizablePanel>
-        <ResizableHandle withHandle />
+        <ResizableHandle
+          withHandle
+          style={{ height: isMobile ? "12px" : undefined }}
+        />
         <ResizablePanel minSize={isMobile ? panelMinSize / 5 : panelMinSize}>
           <ChatAIPanel />
         </ResizablePanel>

@@ -46,7 +46,8 @@ export const ChatPdfUploadZone: FC<ChatPdfUploadZoneProps> = ({
         .join(", ");
 
       toast({
-        title: "Sucessfully uploaded files",
+        title:
+          "Sucessfully uploaded files. Beginning final step to embed files...",
         description: `Files ${uploadedFilesString}`,
       });
 
@@ -69,7 +70,8 @@ export const ChatPdfUploadZone: FC<ChatPdfUploadZoneProps> = ({
       }
 
       toast({
-        title: "Embedding files...",
+        title:
+          "Embedding files... After this, the file will be ready for chatting.",
         description: `Files ${uploadedFilesString}`,
       });
 
@@ -82,7 +84,7 @@ export const ChatPdfUploadZone: FC<ChatPdfUploadZoneProps> = ({
       setIsUploading(false);
 
       toast({
-        title: "Sucessfully embedded files",
+        title: "Sucessfully embedded files. It is ready for chatting!",
         description: `Files ${uploadedFilesString}`,
       });
 
@@ -129,7 +131,8 @@ export const ChatPdfUploadZone: FC<ChatPdfUploadZoneProps> = ({
             size={35}
           />
           <div className="text-sm">
-            Uploading files... Please do not exit out of the dialog!
+            Uploading files... Please do not exit out of the dialog! This can
+            take a few minutes if the PDF file is large.
           </div>
         </div>
       ) : (

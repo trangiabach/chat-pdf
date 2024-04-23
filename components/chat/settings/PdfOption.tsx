@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { deleteFileFromBucket } from "@/db/storage/helpers";
 import { cn } from "@/lib/utils";
@@ -6,7 +7,7 @@ import { useModels } from "@/providers/ModelsProvider";
 import { usePdfs } from "@/providers/PdfsProvider";
 import { useSettings } from "@/providers/SettingsProvider";
 import { Pdf } from "@/types";
-import { FC, useState } from "react";
+import React, { FC, useState } from "react";
 import { MdDownloading, MdOutlineDelete } from "react-icons/md";
 
 export interface PdfOptionInterface {
@@ -14,7 +15,7 @@ export interface PdfOptionInterface {
 }
 
 export const pdfOptionGraphic = {
-  size: 15,
+  size: 18,
 };
 
 export const PdfOption: FC<PdfOptionInterface> = ({ pdf }) => {
@@ -24,7 +25,8 @@ export const PdfOption: FC<PdfOptionInterface> = ({ pdf }) => {
 
   const [isDeleting, setIsDeleting] = useState(false);
 
-  const onClickDelete = async () => {
+  const onClickDelete = async (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
     if (selectedPdf?.id === pdf.id) {
       refreshChatId();
     }
@@ -34,23 +36,26 @@ export const PdfOption: FC<PdfOptionInterface> = ({ pdf }) => {
     setIsDeleting(false);
   };
 
-  const onClickOption = () => {
+  const onClickOption = (event: React.MouseEvent<HTMLDivElement>) => {
+    event.preventDefault();
     setSelectedPdf(pdf);
   };
 
   return (
     <>
       <div
-        className="text-[0.7rem] flex justify-between items-center hover:cursor-pointer hover:bg-accent p-1 rounded-md"
+        className="text-[0.7rem] flex justify-between space-x-1 items-center hover:cursor-pointer hover:bg-accent p-1 rounded-md"
         onClick={onClickOption}
       >
         <span>{pdf.name}</span>
-        <span
+        <Button
           className={cn(
-            "text-primary hover:text-red-500 hover:cursor-pointer transition-all",
+            "text-primary w-5 hover:text-red-500 hover:cursor-pointer transition-all z-10",
             isDeleting && "opacity-80 pointer-events-none text-red-500"
           )}
           onClick={onClickDelete}
+          variant="ghost"
+          size="icon"
         >
           {isDeleting ? (
             <MdDownloading
@@ -60,7 +65,7 @@ export const PdfOption: FC<PdfOptionInterface> = ({ pdf }) => {
           ) : (
             <MdOutlineDelete size={pdfOptionGraphic.size} />
           )}
-        </span>
+        </Button>
       </div>
       <Separator className="my-2" />
     </>
