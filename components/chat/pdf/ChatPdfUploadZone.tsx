@@ -134,7 +134,7 @@ export const ChatPdfUploadZone: FC<ChatPdfUploadZoneProps> = ({
           className="h-[150px] w-full flex items-center justify-center cursor-pointer border-primary border border-dashed rounded-sm"
           {...getRootProps()}
         >
-          <input {...getInputProps()} />
+          <input type="file" {...getInputProps()} />
           {isDragActive ? (
             <p>Drop the files here ...</p>
           ) : (
