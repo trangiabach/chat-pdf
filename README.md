@@ -33,7 +33,7 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) and ChatPDF should be up and running!
 
-## Features 💻
+## Features 🙌
 - Support uploading multiple PDFs
 - Support multiple LLMs from OpenAI and Anthropic
 - Select an uploaded PDF of any choice to chat to, even during chat
@@ -52,7 +52,7 @@ ChatPDF is partitioned into the following:
 - **Components Library**: [shadcn/ui](https://ui.shadcn.com/)
 - **Server/Backend Frameworks**: ChatPDF uses [Next.js serverless API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes), which creates API endpoints as Node.js serverless functions. These functions are defined under `app/api/*`
 - **Storage**: A bucket to store PDF files using [Supabase Storage](https://supabase.com/docs/guides/storage)
-- **Vector Store**: A vector store to  store embeddings of PDF files (for RAG) using [Supabase pgvector]
+- **Vector Store**: A vector store to  store embeddings of PDF files (for RAG) using [Supabase pgvector](https://supabase.com/vector)
 - **LLM Interface**: Uses Langchain to interface with multiple LLMs and create RAG features efficiently
 - **LLM UI**: Uses [Vercel AI SDK](https://sdk.vercel.ai/docs) to handle streaming and state management in the UI efficiently
 
@@ -79,17 +79,17 @@ We can account for some limitations and improve ChatPDF:
 - LLM Observability via Langfuse
 
 
-## Approach
+## Approach 🔎
 ChatPDF has 2 main functionality:
 
-1. PDFs processing and embedding (Process/embed endpoint is available in `/api/pdfs/embed`)
+1. PDFs processing and embedding (process/embed endpoint is available in `app/api/pdfs/embed`)
    - Uploaded PDFs are sent to the server-side, where PDFJS is used to extract text. 
    - The texts are then splitted into smaller documents (<=4000 tokens in size).
    - These documents are then embedded, with the corresponding PDF's metadata and upserted into Supabase's PG vector store.
    - The PDF is stored in a Supabase's bucket to be used later for display on the frontend
 
-2. RAG (RAG endpoint is available in `/api/chat`)
+2. RAG (RAG endpoint is available in `app/api/chat`)
    - Users sends query, along with thir desired model, PDF file to chat to and chat hisory
    - Query is embedded. The top 3 most similar text chunks from the PDF file is retrieved, which is combined into a context
-   - The context is included in the prompt along with the chat history and send to the LLM
+   - The context is included in the prompt along with the chat history and send to the
    - LLM streams its response token-by-token back to the frontend
