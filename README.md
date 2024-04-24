@@ -41,8 +41,10 @@ Open [http://localhost:3000](http://localhost:3000) and ChatPDF should be up and
 - Refresh, stop chats functionality
 - Remove unwanted PDFs
 - Adjust model temparatures
-- Support large PDFs ingestion/understanding via vector embeddings retrieveal and token splitting
+- Support large PDFs ingestion/understanding via vector embeddings retrieval and token splitting
 - Streaming UI, token-by-token
+- Theme switching
+- Mobile responsive
 
 ## Architecture ⚙️
 
