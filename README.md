@@ -79,11 +79,17 @@ We can account for some limitations and improve ChatPDF:
 - LLM Observability via Langfuse
 
 
-## Learn More
+## Approach
+ChatPDF has 2 main functionality:
 
-To learn more about Next.js, take a look at the following resources:
+1. PDFs processing and embedding
+   - Uploaded PDFs are sent to the server-side, where PDFJS is used to extract text. 
+   - The texts are then splitted into smaller documents (<=4000 tokens in size).
+   - These documents are then embedded, with the corresponding PDF's metadata and upserted into Supabase's PG vector store.
+   - The PDF is stored in a Supabase's bucket to be used later for display on the frontend
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can also check out [the Next.js GitHub repository](https://github.com/vercel/next.js/)
+2. RAG (RAG endpoint is available in `/api/chat`)
+   - Users sends query, along with thir desired model, PDF file to chat to and chat hisory
+   - Query is embedded. The top 3 most similar text chunks from the PDF file is retrieved, which is combined into a context
+   - The context is included in the prompt along with the chat history and send to the LLM
+   - LLM streams its response token-by-token back to the frontend
