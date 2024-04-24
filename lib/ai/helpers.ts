@@ -33,9 +33,10 @@ export const generatePrompt = (chatHistoryString: string, pdf: Pdf) => {
     `You are ChatPDF. You answer questions related to a PDF file.
 
         Your responses should be moderately detailed.
+        Your respone should be concrete.
         Your responses should focus on the PDF file called ${pdf.name}
         
-        Here are some contexts about the PDF file, use it to guide your response: {context}
+        Here are details about the PDF file, use it to guide your response: {context}
         
         Here is the chat history so far: ${chatHistoryString}
         

@@ -26,6 +26,7 @@ interface ChatAIInputProps {
   isLoading: boolean;
   stop: () => void;
   error?: Error;
+  resetChat: () => void;
 }
 
 const chatAIInputGraphic = {
@@ -40,6 +41,7 @@ export const ChatAIInput: FC<ChatAIInputProps> = ({
   setInput,
   isLoading,
   error,
+  resetChat,
 }) => {
   const onKeyPress = async (
     event: React.KeyboardEvent<HTMLTextAreaElement>
@@ -72,6 +74,12 @@ export const ChatAIInput: FC<ChatAIInputProps> = ({
     stop();
   };
 
+  const onClickReset = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    stop();
+    resetChat();
+  };
+
   const isDisabled = isLoading || input.length === 0;
 
   return (
@@ -90,7 +98,7 @@ export const ChatAIInput: FC<ChatAIInputProps> = ({
               />
             </div>
           )}
-          {error && (
+          {error && error.message !== "network error" && (
             <div className="flex bg-red-500 space-x-2 text-xs px-3 py-2 rounded-md text-white">
               <MdOutlineError
                 className="animate-pulse"
@@ -113,6 +121,7 @@ export const ChatAIInput: FC<ChatAIInputProps> = ({
             <Button
               variant="outline"
               className="rounded-lg text-xs py-0 max-h-8 flex space-x-2"
+              onClick={onClickReset}
             >
               <span>Reset</span>
               <BiReset size={chatAIInputGraphic.size} />

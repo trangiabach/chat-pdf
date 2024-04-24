@@ -28,6 +28,7 @@ export const ChatAIWindow = () => {
     isLoading,
     stop,
     error,
+    refreshChatId,
   } = useChat();
 
   const isInvalidChat = !selectedPdf || !selectedModel;
@@ -63,6 +64,7 @@ export const ChatAIWindow = () => {
         isLoading={isLoading}
         stop={stop}
         error={error}
+        resetChat={refreshChatId}
       />
     </div>
   );

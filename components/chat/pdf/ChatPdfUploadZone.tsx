@@ -137,7 +137,7 @@ export const ChatPdfUploadZone: FC<ChatPdfUploadZoneProps> = ({
           <div className="text-sm">
             Uploading files... <br />
             If you want to track progress, please do not exit this window.
-            Otherwise, you will be noitified when the PDF is ready to use for
+            Otherwise, you will be notified when the PDF is ready to use for
             chatting! <br />
             This can take a few minutes if the PDF file is large.
           </div>
