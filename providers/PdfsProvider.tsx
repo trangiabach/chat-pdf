@@ -31,10 +31,15 @@ export const usePdfs = () => {
   return context;
 };
 
-interface PdfsProviderProps extends PropsWithChildren {}
+interface PdfsProviderProps extends PropsWithChildren {
+  initialPdfs?: Pdf[];
+}
 
-export const PdfsProvider: FC<PdfsProviderProps> = ({ children }) => {
-  const [pdfs, setPdfs] = useState<Pdf[]>([]);
+export const PdfsProvider: FC<PdfsProviderProps> = ({
+  children,
+  initialPdfs,
+}) => {
+  const [pdfs, setPdfs] = useState<Pdf[]>(initialPdfs || []);
   const [selectedPdf, setSelectedPdf] = useState<Pdf | undefined>(undefined);
 
   useEffect(() => {

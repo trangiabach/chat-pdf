@@ -19,11 +19,13 @@ export const metadata: Metadata = {
   description: "A new ChatPDF",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const pdfs = await getAllFilesWithinBucket();
+
   return (
     <html lang="en">
       <body className={inter.className}>
@@ -34,7 +36,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <SettingsProvider>
-            <PdfsProvider>
+            <PdfsProvider initialPdfs={pdfs}>
               <ModelsProvider>
                 <ChatProvider>
                   <Navbar />
