@@ -1,3 +1,8 @@
+# ChatPDF
+
+<img width="1727" alt="Screenshot 2024-04-23 at 8 41 42 PM" src="https://github.com/trangiabach/chat-pdf/assets/62537937/e0518c85-295f-4b39-8254-0b9b05a93f49">
+
+
 [ChatPDF](https://chat-to-pdf.vercel.app/) is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 Live deployment link: [https://chat-to-pdf.vercel.app/](https://chat-to-pdf.vercel.app/).
