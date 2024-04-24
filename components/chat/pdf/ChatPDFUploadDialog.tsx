@@ -21,7 +21,10 @@ export const ChatPdfUploadDialog: FC<PropsWithChildren> = ({ children }) => {
       <DialogContent
         onInteractOutside={(e) => {
           e.preventDefault();
+          e.stopImmediatePropagation();
+          e.stopPropagation();
         }}
+        forceMount
       >
         <DialogHeader>
           <DialogTitle>

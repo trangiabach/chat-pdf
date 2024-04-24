@@ -1,10 +1,11 @@
+import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { usePdfs } from "@/providers/PdfsProvider";
 import { ScrollArea } from "@radix-ui/react-scroll-area";
 import { PdfOption } from "./PdfOption";
 
 export const PdfSettings = () => {
-  const { pdfs } = usePdfs();
+  const { pdfs, refreshPdfs } = usePdfs();
 
   return (
     <div className="pt-6">
@@ -30,6 +31,13 @@ export const PdfSettings = () => {
             ))}
           </div>
         </ScrollArea>
+        <Button
+          variant="outline"
+          onClick={refreshPdfs}
+          className="w-fit text-[0.7rem] py-1 px-2"
+        >
+          Refresh PDFs
+        </Button>
       </div>
     </div>
   );

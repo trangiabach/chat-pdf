@@ -5,6 +5,7 @@ import { TbSend } from "react-icons/tb";
 import { AiOutlineLoading } from "react-icons/ai";
 import { FaRegStopCircle } from "react-icons/fa";
 import { MdOutlineError } from "react-icons/md";
+import { BiReset } from "react-icons/bi";
 
 interface ChatAIInputProps {
   handleSubmit: (
@@ -109,6 +110,13 @@ export const ChatAIInput: FC<ChatAIInputProps> = ({
             required
           />
           <div className="absolute right-2 bottom-2 inline-flex gap-1 sm:gap-2 items-center justify-end">
+            <Button
+              variant="outline"
+              className="rounded-lg text-xs py-0 max-h-8 flex space-x-2"
+            >
+              <span>Reset</span>
+              <BiReset size={chatAIInputGraphic.size} />
+            </Button>
             {isLoading && (
               <Button
                 onClick={onClickStop}

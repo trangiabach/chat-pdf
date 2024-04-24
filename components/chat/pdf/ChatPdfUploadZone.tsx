@@ -24,6 +24,7 @@ export const ChatPdfUploadZone: FC<ChatPdfUploadZoneProps> = ({
   const { refreshPdfs, setSelectedPdf, pdfs } = usePdfs();
 
   const onDrop = useCallback(async (acceptedFiles: File[]) => {
+    console.log("dropped");
     try {
       const fileUploads = acceptedFiles.map((file) => uploadFileToBucket(file));
 
@@ -58,13 +59,21 @@ export const ChatPdfUploadZone: FC<ChatPdfUploadZoneProps> = ({
       );
 
       if (failedFiles.length > 0) {
-        setError(
-          `Failed to upload files ${failedFiles
-            .map((file) => `${file.name} (${file.error})`)
-            .join(", ")}`
-        );
+        const failedErrorString = failedFiles
+          .map((file) => `${file.name} (${file.error})`)
+          .join(", ");
+
+        setError(`Failed to upload files ${failedErrorString}`);
+
+        toast("Failed to upload files", {
+          description: failedErrorString,
+        });
 
         setIsUploading(false);
+      }
+
+      if (failedFiles.length > 0 && sucessfullyUploadedFiles.length == 0) {
+        return;
       }
 
       toast(
@@ -113,6 +122,7 @@ export const ChatPdfUploadZone: FC<ChatPdfUploadZoneProps> = ({
     accept: {
       "application/pdf": [".pdf"],
     },
+    noDragEventsBubbling: true,
   });
 
   return (
@@ -125,8 +135,11 @@ export const ChatPdfUploadZone: FC<ChatPdfUploadZoneProps> = ({
             size={35}
           />
           <div className="text-sm">
-            Uploading files... Please do not exit out of the dialog! This can
-            take a few minutes if the PDF file is large.
+            Uploading files... <br />
+            If you want to track progress, please do not exit this window.
+            Otherwise, you will be noitified when the PDF is ready to use for
+            chatting! <br />
+            This can take a few minutes if the PDF file is large.
           </div>
         </div>
       ) : (
@@ -134,7 +147,7 @@ export const ChatPdfUploadZone: FC<ChatPdfUploadZoneProps> = ({
           className="h-[150px] w-full flex items-center justify-center cursor-pointer border-primary border border-dashed rounded-sm"
           {...getRootProps()}
         >
-          <input type="file" {...getInputProps()} />
+          <input className="w-full h-full" type="file" {...getInputProps()} />
           {isDragActive ? (
             <p>Drop the files here ...</p>
           ) : (
