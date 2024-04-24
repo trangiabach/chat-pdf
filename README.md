@@ -82,7 +82,7 @@ We can account for some limitations and improve ChatPDF:
 ## Approach
 ChatPDF has 2 main functionality:
 
-1. PDFs processing and embedding
+1. PDFs processing and embedding (Process/embed endpoint is available in `/api/pdfs/embed`)
    - Uploaded PDFs are sent to the server-side, where PDFJS is used to extract text. 
    - The texts are then splitted into smaller documents (<=4000 tokens in size).
    - These documents are then embedded, with the corresponding PDF's metadata and upserted into Supabase's PG vector store.
