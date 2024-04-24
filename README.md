@@ -7,6 +7,8 @@
 
 Live deployment link: [https://chat-to-pdf.vercel.app/](https://chat-to-pdf.vercel.app/).
 
+Features Walkthrough Demo: [https://drive.google.com/file/d/1fSoZTbu8a_s8J6-6utZfVOLvijlDH97j/view?usp=sharing](https://drive.google.com/file/d/1fSoZTbu8a_s8J6-6utZfVOLvijlDH97j/view?usp=sharing)
+
 ## Local Development 💻
 
 Here is a guide to run ChatPDF locally:
@@ -71,9 +73,10 @@ We can account for some limitations and improve ChatPDF:
 - Agent/Multi-step queries to improve quality of response
 - Select multiple PDFs to chat with at once
 - Introduce more models, particularly open-source ones
-- Settings to adjust desired chunk length and overlap
+- Settings to adjust desired chunk length and overlap for users
 - Improve prompt and prompt customization for users
-
+- More linter rules
+- LLM Observability via Langfuse
 
 
 ## Learn More
